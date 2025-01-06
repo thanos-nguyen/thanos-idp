@@ -1,0 +1,11 @@
+domainFilters:
+- "thanos.ip-ddns.com"
+sources:
+- ingress
+provider: cloudflare
+env:
+- name: DO_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: external-dns-provider-token
+      key: do-token

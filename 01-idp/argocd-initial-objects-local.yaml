@@ -1,0 +1,109 @@
+applicationsets:
+  app-of-apps:
+    namespace: argocd
+    finalizers:
+    - resources-finalizer.argocd.argoproj.io
+    project: infra
+    goTemplate: true
+    goTemplateOptions: ["missingkey=error"]
+    generators:
+      - path: ../gitops/cluster-addons/*
+        repoURL: "."  
+    template:
+      metadata:
+        name: '{{.path.basename}}'
+      spec:
+        project: infra
+        source:
+          repoURL: "."
+          path: ../gitops/cluster-addons/*
+        destination:
+          server: https://kubernetes.default.svc
+          namespace: '{{.path.basename}}'
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: true
+          syncOptions:
+          - CreateNamespace=true
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: argocd
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+
+  apps:
+    namespace: argocd
+    finalizers:
+    - resources-finalizer.argocd.argoproj.io
+    project: apps
+    goTemplate: true
+    goTemplateOptions: ["missingkey=error"]
+    generators:
+    - path: ../gitops/apps/*
+      repoURL: "."
+    template:
+      metadata:
+        name: '{{.path.basename}}'
+      spec:
+        project: apps
+        source:
+          repoURL: "."
+          path: ../gitops/apps/*
+        destination:
+          server: https://kubernetes.default.svc
+          namespace: '{{.path.basename}}'
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: true
+          syncOptions:
+          - CreateNamespace=true
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: argocd
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+
+projects:
+  infra:
+    namespace: argocd
+    finalizers:
+    - resources-finalizer.argocd.argoproj.io
+    description: Infrastructure components on management cluster
+    sourceRepos:
+    - '*'
+    destinations:
+    - namespace: "*"
+      server: chttps://kubernetes.default.svc
+    clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+    sourceNamespaces:
+    - '*'
+
+  apps:
+    namespace: argocd
+    finalizers:
+    - resources-finalizer.argocd.argoproj.io
+    description: Applications on management cluster
+    sourceRepos:
+    - '*'
+    destinations:
+    - namespace: "*"
+      server: https://kubernetes.default.svc
+    clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+    sourceNamespaces:
+    - '*'

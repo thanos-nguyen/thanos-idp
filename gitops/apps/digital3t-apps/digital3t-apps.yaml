@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: digital3t-apps
+  namespace: argocd
+spec:
+  destination:
+    namespace: digital3t-apps
+    server: https://kubernetes.default.svc
+  source:
+    path: 02-wasm-dapr/kustomize
+    repoURL: https://github.com/thanos-nguyen/thanos-idp.git
+    targetRevision: HEAD
+    kustomize:
+      namespace: digital3t-apps
+  project: apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - ServerSideApply=true
+    - CreateNamespace=true
