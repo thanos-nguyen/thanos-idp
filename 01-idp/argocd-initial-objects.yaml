@@ -11,6 +11,10 @@ applicationsets:
         repoURL: https://github.com/thanos-nguyen/thanos-idp.git
         revision: HEAD
         branch: main
+        tokenSecret: 
+          name: git-token
+          namespace: argocd
+          value: '{{ env.GIT_TOKEN }}'
         directories:
         - path: gitops/cluster-addons/*
     template:
@@ -21,6 +25,10 @@ applicationsets:
         source:
           repoURL: https://github.com/thanos-nguyen/thanos-idp.git
           targetRevision: HEAD
+          tokenSecret: 
+            name: git-token
+            namespace: argocd
+            value: '{{ env.GIT_TOKEN }}'
           path: '{{.path.path}}'
         destination:
           server: https://kubernetes.default.svc
@@ -54,6 +62,10 @@ applicationsets:
         repoURL: https://github.com/thanos-nguyen/thanos-idp.git
         revision: HEAD
         branch: main
+        tokenSecret: 
+          name: git-token
+          namespace: argocd
+          value: '{{ env.GIT_TOKEN }}'
         directories:
         - path: gitops/apps/*
     template:
@@ -64,6 +76,10 @@ applicationsets:
         source:
           repoURL: https://github.com/thanos-nguyen/thanos-idp.git
           targetRevision: HEAD
+          tokenSecret: 
+            name: git-token
+            namespace: argocd
+            value: '{{ env.GIT_TOKEN }}'
           path: '{{.path.path}}'
         destination:
           server: https://kubernetes.default.svc

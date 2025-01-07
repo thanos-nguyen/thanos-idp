@@ -2,6 +2,13 @@ import * as k8s from "@pulumi/kubernetes";
 import * as pulumi from "@pulumi/pulumi";
 import {jsonStringify} from "@pulumi/pulumi";
 
+const config = new pulumi.Config();
+const gitToken = config.requireSecret('git-token');
+
+const env = {
+  GIT_TOKEN: gitToken,
+};
+
 export interface InitialRepository {
     url?: string;
     branch?: string;
@@ -56,6 +63,9 @@ export class ArgoCD extends pulumi.ComponentResource {
             valueYamlFiles: [
                 args.initialObjects || new pulumi.asset.FileAsset(""),
             ],
+            values: {
+                env: env
+            }
         }, {
             parent: this,
             dependsOn: argocd,
