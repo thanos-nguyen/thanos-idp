@@ -1,11 +1,28 @@
+#Personal Access Token
+#apiVersion: v1
+#kind: Secret
+#metadata:
+#  name: github-token
+#type: Opaque
+#data:
+#  token: <base64 encoded token>
+#SSH Key
+#GitHub App
+
 backstage:
   serviceAccount:
     create: true
     name: backstage
   backstage:
     image:
-      repository: thanos-nguyen/thanos-backstage
+      repository: ghcr.io/thanos-nguyen/thanos-backstage
       tag: 0.0.1
+#    env:
+#      - name: GITHUB_TOKEN
+#        valueFrom:
+#          secretKeyRef:
+#            name: github-token
+#            key: token  
     extraEnvVarsSecrets:
       - backstage-secrets
     extraEnvVars:
