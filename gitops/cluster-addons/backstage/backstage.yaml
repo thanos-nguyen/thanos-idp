@@ -28,9 +28,9 @@ spec:
   - repoURL: https://github.com/thanos-nguyen/thanos-idp.git
     targetRevision: HEAD
     path: gitops/cluster-addons/backstage/manifest
-  - repoURL: https://github.com/my-silly-organisation/backstage.git
+  - repoURL: https://github.com/thanos-nguyen/thanos-backstage.git
     targetRevision: main
-    path: backstage-umbrella
+    path: my-chart
     helm:
       valueFiles:
       - $values/gitops/cluster-addons/backstage/helm-values.yaml

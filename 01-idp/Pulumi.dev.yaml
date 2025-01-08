@@ -1,2 +1,3 @@
 environment:
   - 01-idp/dev
+  - 01-idp/db

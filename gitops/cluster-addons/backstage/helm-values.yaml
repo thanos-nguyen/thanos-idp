@@ -4,8 +4,8 @@ backstage:
     name: backstage
   backstage:
     image:
-      repository: ghcr.io/my-silly-organisation/backstage
-      tag: 1.31.2
+      repository: ghcr.io/thanos-nguyen/thanos-backstage
+      tag: 0.0.1
     extraEnvVarsSecrets:
       - backstage-secrets
     extraEnvVars:
@@ -16,7 +16,7 @@ backstage:
       - name: BASE_URL
         value: backstage-wasmcon.ediri.online
       - name: CATALOG_LOCATION
-        value: "https://github.com/thanos-nguyen/thanos-idp/blob/main/templates/catalog-all.yaml"
+        value: "https://raw.githubusercontent.com/thanos-nguyen/thanos-idp/refs/heads/main/templates/catalog-all.yaml"
       - name: POSTGRES_HOST
         value: "backstage-app-cluster-rw"
       - name: POSTGRES_PORT

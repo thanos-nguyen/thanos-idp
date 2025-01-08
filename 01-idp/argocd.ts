@@ -4,6 +4,7 @@ import {jsonStringify} from "@pulumi/pulumi";
 
 const config = new pulumi.Config();
 const gitToken = config.requireSecret('git-token');
+const pulumiPat = config.requireSecret('PULUMI_PAT');
 
 const env = {
   GIT_TOKEN: gitToken,
@@ -28,6 +29,18 @@ export class ArgoCD extends pulumi.ComponentResource {
                 args: ArgoCDArgs,
                 opts: pulumi.ComponentResourceOptions = {}) {
         super("pkg:index:ArgoCD", name, {}, opts);
+
+        const pulumi_access_token = new k8s.core.v1.Secret("pulumi-access-token", {
+            metadata: {
+                name: "pulumi-access-token",
+                namespace: 'default'
+            },
+            type: "Opaque",
+            data: {
+//                "PULUMI_ACCESS_TOKEN": pulumi.secret("your-pulumi-access-token"),
+                "PULUMI_ACCESS_TOKEN": pulumiPat 
+            }
+        });
 
         const argocd = new k8s.helm.v3.Release("argocd", {
             chart: "argo-cd",

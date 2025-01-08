@@ -6,8 +6,8 @@ spec:
   provider:
     pulumi:
       organization: thanosnguyen
-      environment: 01-idp-dev
-      project: thanos-idp
+      environment: dev
+      project: 01-idp
       accessToken:
         secretRef:
           name: pulumi-access-token
@@ -23,7 +23,7 @@ spec:
     pulumi:
       organization: thanosnguyen
       environment: db
-      project: thanos-idp
+      project: 01-idp
       accessToken:
         secretRef:
           name: pulumi-access-token
