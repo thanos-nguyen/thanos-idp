@@ -30,16 +30,18 @@ export class ArgoCD extends pulumi.ComponentResource {
                 opts: pulumi.ComponentResourceOptions = {}) {
         super("pkg:index:ArgoCD", name, {}, opts);
 
-        const pulumi_access_token = new k8s.core.v1.Secret("pulumi-access-token", {
+      
+        const pulumiAccessToken = new k8s.core.v1.Secret("pulumi-access-token", {
             metadata: {
                 name: "pulumi-access-token",
                 namespace: 'default'
             },
             type: "Opaque",
-            data: {
-//                "PULUMI_ACCESS_TOKEN": pulumi.secret("your-pulumi-access-token"),
-                "PULUMI_ACCESS_TOKEN": pulumiPat 
+            stringData: {
+              "PULUMI_ACCESS_TOKEN": `${pulumiPat}`
             }
+        }, {
+            parent: this,
         });
 
         const argocd = new k8s.helm.v3.Release("argocd", {

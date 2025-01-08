@@ -4,7 +4,7 @@ backstage:
     name: backstage
   backstage:
     image:
-      repository: ghcr.io/thanos-nguyen/thanos-backstage
+      repository: thanos-nguyen/thanos-backstage
       tag: 0.0.1
     extraEnvVarsSecrets:
       - backstage-secrets
