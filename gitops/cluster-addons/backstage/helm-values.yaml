@@ -21,6 +21,13 @@ backstage:
         value: "backstage-app-cluster-rw"
       - name: POSTGRES_PORT
         value: "5432"
+      - name: POSTGRES_USER
+        value: "backstage"
+      - name: POSTGRES_PASSWORD
+        valueFrom:
+          secretKeyRef:
+              name: cnpg-secret
+              key: db.backstage.password
       - name: NODE_TLS_REJECT_UNAUTHORIZED
         value: "0"
   ingress:
