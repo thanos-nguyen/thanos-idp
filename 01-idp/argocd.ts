@@ -4,6 +4,7 @@ import {jsonStringify} from "@pulumi/pulumi";
 
 const config = new pulumi.Config();
 const gitToken = config.requireSecret('git-token');
+const pulumiPat = config.get('PULUMI_PAT');
 
 const env = {
   GIT_TOKEN: gitToken,
@@ -37,7 +38,7 @@ export class ArgoCD extends pulumi.ComponentResource {
             },
             type: "Opaque",
             stringData: {
-              "PULUMI_ACCESS_TOKEN": config.require("PULUMI_PAT")
+              "PULUMI_ACCESS_TOKEN": `${pulumiPat}`
             }
         }, {
             parent: this,
