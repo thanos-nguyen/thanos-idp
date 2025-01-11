@@ -8,4 +8,4 @@ env:
     valueFrom:
       secretKeyRef:
         name: cf-token-secret
-        key: cf-token
+        key: cftoken
