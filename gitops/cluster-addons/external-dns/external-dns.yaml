@@ -9,11 +9,9 @@ spec:
     server: https://kubernetes.default.svc
   project: infra
   sources:
-  - path: gitops/cluster-addons/external-dns/config
-    targetRevision: main
-    directory:
-      recurse: true
-    repoURL: https://github.com/thanos-nguyen/thanos-idp.git
+  - repoURL: https://github.com/thanos-nguyen/thanos-idp.git
+    targetRevision: HEAD
+    path: gitops/cluster-addons/external-dns/config
   - repoURL: https://kubernetes-sigs.github.io/external-dns/
     targetRevision: 1.15.0
     chart: external-dns
