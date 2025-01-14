@@ -2,7 +2,6 @@ domainFilters:
   - "thanos.ip-ddns.com"
 
 sources:
-  - service
   - ingress
 
 provider: cloudflare

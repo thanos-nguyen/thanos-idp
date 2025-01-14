@@ -29,7 +29,7 @@ server:
     hostname: argocd.thanos.ip-ddns.com
     ingressClassName: nginx
     annotations:
-      "external-dns.alpha.kubernetes.io/hostname": argocd.thanos.ip-ddns.com
+      "external-dns.alpha.kubernetes.io/hostname": "argocd.thanos.ip-ddns.com"
       "external-dns.alpha.kubernetes.io/ttl": "60"
 
   resources:

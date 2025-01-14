@@ -33,7 +33,7 @@ backstage:
   ingress:
     enabled: true
     annotations:
-      "external-dns.alpha.kubernetes.io/hostname": backstage.thanos.ip-ddns.com
+      "external-dns.alpha.kubernetes.io/hostname": "backstage.thanos.ip-ddns.com"
       "external-dns.alpha.kubernetes.io/ttl": "60"
     className: nginx
     host: backstage.thanos.ip-ddns.com
