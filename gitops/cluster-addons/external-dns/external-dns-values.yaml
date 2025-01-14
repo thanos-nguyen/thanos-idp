@@ -1,7 +1,10 @@
-domainFilters:
-- "thanos.ip-ddns.com"
+#domainFilters:
+#- "thanos.ip-ddns.com"
+
 sources:
-- ingress
+  - service
+  - ingress
+
 provider: cloudflare
 
 policy: sync
