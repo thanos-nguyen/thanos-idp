@@ -10,5 +10,5 @@ env:
   - name: CF_API_TOKEN
     valueFrom:
       secretKeyRef:
-        name: external-dns-provider-token
-        key: cfat
+        name: cf-token-secret
+        key: cftoken
