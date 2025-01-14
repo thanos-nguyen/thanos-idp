@@ -31,7 +31,7 @@ backstage:
       - name: NODE_TLS_REJECT_UNAUTHORIZED
         value: "0"
   ingress:
-    enabled: true
+    enabled: false
     annotations:
       "external-dns.alpha.kubernetes.io/hostname": "backstage.thanos.ip-ddns.com"
       "external-dns.alpha.kubernetes.io/ttl": "60"
