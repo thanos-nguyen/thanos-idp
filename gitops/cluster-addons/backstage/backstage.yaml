@@ -7,7 +7,7 @@ spec:
   project: infra
   sources:
   - repoURL: https://cloudnative-pg.github.io/charts
-    targetRevision: 0.1.0
+    targetRevision: 0.2.0
     chart: cluster
     helm:
       valuesObject:
