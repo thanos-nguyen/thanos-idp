@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dadjoke-backend
+  name: thanos-backend
 spec:
   selector:
     matchLabels:
-      app: dadjoke-backend
+      app: thanos-backend
   template:
     metadata:
       labels:
-        app: dadjoke-backend
+        app: thanos-backend
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "dadjoke-backend"
+        dapr.io/app-id: "thanos-backend"
         dapr.io/app-port: "3000"
     spec:
       containers:
-      - name: dadjoke-backend
+      - name: thanos-backend
         image: backend
         ports:
         - containerPort: 3000
@@ -30,19 +30,19 @@ spec:
         - name: OPENAI_API_KEY
           valueFrom:
             secretKeyRef:
-              name: dadjoke-secrets
+              name: thanos-secrets
               key: api-key
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ClusterSecretStore
 metadata:
-  name: dadjoke-secret-store
+  name: thanos-secret-store
 spec:
   provider:
     pulumi:
-      organization: dirien
-      environment: dadjoke
-      project: next-level-powers-enhance-your-idp-with-the-wasm-and-dapr-hero-team-up
+      organization: thanosnguyen
+      environment: dev
+      project: 01-idp
       accessToken:
         secretRef:
           name: pulumi-access-token
@@ -52,12 +52,12 @@ spec:
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: dadjoke-secrets
+  name: thanos-secrets
 spec:
   refreshInterval: 20s
   secretStoreRef:
     kind: ClusterSecretStore
-    name: dadjoke-secret-store
+    name: thanos-secret-store
   dataFrom:
   - extract:
       conversionStrategy: Default
@@ -68,10 +68,10 @@ spec:
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
-  name: dadjoke-backend-scaledobject
+  name: thanos-backend-scaledobject
 spec:
   scaleTargetRef:
-    name: dadjoke-backend
+    name: thanos-backend
   pollingInterval: 10
   maxReplicaCount: ${{values.maxBackedReplicaCount}}
   minReplicaCount: 0
@@ -79,7 +79,7 @@ spec:
   - type: kafka
     metadata:
       bootstrapServers: ${{values.kafkaClusterName}}-kafka-bootstrap.test.svc.cluster.local:9092
-      consumerGroup: dadjoke-backend
+      consumerGroup: thanos-backend
       scaleToZeroOnInvalidOffset: "true"
       topic: dad-jokes
       lagThreshold: "5"

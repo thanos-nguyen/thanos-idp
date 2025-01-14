@@ -1,14 +1,14 @@
 apiVersion: core.spinoperator.dev/v1alpha1
 kind: SpinApp
 metadata:
-  name: dadjokes-generator
+  name: thanos-generator
 spec:
-  image: dadjokes-generator-api
+  image: thanos-generator-api
   executor: containerd-shim-spin
   replicas: 1
   checks: {}
   podLabels:
-    "backstage.io/kubernetes-id": dadjokes
+    "backstage.io/kubernetes-id": thanos
   variables:
   - name: PUBSUB_NAME
     value: pubsub
@@ -18,15 +18,15 @@ spec:
     value: "3500"
   podAnnotations:
     dapr.io/enabled: "true"
-    dapr.io/app-id: "dadjokes-generator"
+    dapr.io/app-id: "thanos-generator"
     dapr.io/app-port: "80"
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: dadjokes-generator-ingress
+  name: thanos-generator-ingress
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: dadjoke-api-wasmcon.ediri.online
+    external-dns.alpha.kubernetes.io/hostname: thanos-api-wasmcon.ediri.online
     external-dns.alpha.kubernetes.io/ttl: "60"
 spec:
   ingressClassName: nginx
@@ -38,6 +38,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: dadjokes-generator
+            name: thanos-generator
             port:
               number: 80

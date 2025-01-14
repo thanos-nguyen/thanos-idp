@@ -9,17 +9,17 @@ resources:
 - base/dadjoke-backend.yaml
 - base/spin.yaml
 
-namespace: dadjokes
+namespace: thanos
 
 configurations:
 - config/spinapp-transformer.yaml
 
 commonLabels:
-  "backstage.io/kubernetes-id": dadjokes
+  "backstage.io/kubernetes-id": thanos
 
 labels:
 - pairs:
-    "backstage.io/kubernetes-id": dadjokes
+    "backstage.io/kubernetes-id": thanos
 
 helmCharts:
 - name: kafka-ui
@@ -57,7 +57,7 @@ patchesJson6902:
     group: keda.sh
     version: v1alpha1
     kind: ScaledObject
-    name: dadjoke-backend-scaledobject
+    name: thanos-backend-scaledobject
   patch: |-
     - op: replace
       path: /spec/triggers/0/metadata/bootstrapServers

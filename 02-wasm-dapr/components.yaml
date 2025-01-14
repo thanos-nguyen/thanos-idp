@@ -1,12 +1,12 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: dadjokes
+  name: thanos
   description: |
     Spinkube and Dapr based application to serve dad jokes to users.
   annotations:
-    argocd/app-name: dadjokes
-    backstage.io/kubernetes-id: dadjokes
+    argocd/app-name: thanos
+    backstage.io/kubernetes-id: thanos
   tags:
     - spinkube
     - dapr

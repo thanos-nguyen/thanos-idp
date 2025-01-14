@@ -21,9 +21,9 @@ spec:
     default: /events
   pubsubname: pubsub
 scopes:
-- dadjokes
-- dadjokes-generator
-- dadjokes-frontend
+- thanos
+- thanos-generator
+- thanos-frontend
 ---
 apiVersion: dapr.io/v2alpha1
 kind: Subscription
@@ -35,6 +35,6 @@ spec:
     default: /events
   pubsubname: pubsub
 scopes:
-- dadjokes
-- dadjokes-generator
-- dadjokes-frontend
+- thanos
+- thanos-generator
+- thanos-frontend

@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dadjoke-frontend-deployment
+  name: thanos-frontend-deployment
 spec:
   selector:
     matchLabels:
-      app: dadjoke-frontend
+      app: thanos-frontend
   template:
     metadata:
       labels:
-        app: dadjoke-frontend
+        app: thanos-frontend
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "dadjoke-frontend"
+        dapr.io/app-id: "thanos-frontend"
         dapr.io/app-port: "6002"
     spec:
       containers:
-      - name: dadjoke-frontend
+      - name: thanos-frontend
         image: frontend
         ports:
         - containerPort: 3000
@@ -29,10 +29,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: dadjoke-frontend-service
+  name: thanos-frontend-service
 spec:
   selector:
-    app: dadjoke-frontend
+    app: thanos-frontend
   ports:
   - protocol: TCP
     port: 80        # Service port
@@ -43,7 +43,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: dadjoke-frontend-ingress
+  name: thanos-frontend-ingress
   annotations:
     external-dns.alpha.kubernetes.io/hostname: dadjoke-wasmcon.ediri.online
     external-dns.alpha.kubernetes.io/ttl: "60"
@@ -57,6 +57,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: dadjoke-frontend-service
+            name: thanos-frontend-service
             port:
               number: 80
