@@ -15,3 +15,8 @@ env:
       secretKeyRef:
         name: external-dns-provider-token
         key: cfat
+
+extraArgs:
+  - --cloudflare-proxied
+  - --cloudflare-dns-records-per-page=5000
+  - --default-targets=192.168.101.20
