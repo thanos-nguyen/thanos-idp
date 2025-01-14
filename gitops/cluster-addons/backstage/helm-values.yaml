@@ -37,3 +37,10 @@ backstage:
       "external-dns.alpha.kubernetes.io/ttl": "60"
     className: nginx
     host: backstage.thanos.ip-ddns.com
+
+  livenessProbe:
+    initialDelaySeconds: 300
+    httpGet:
+      path: /.backstage/health/v1/liveness
+      port: 7007
+      scheme: HTTP

@@ -1,5 +1,5 @@
-#domainFilters:
-#- "thanos.ip-ddns.com"
+domainFilters:
+  - "thanos.ip-ddns.com"
 
 sources:
   - service
