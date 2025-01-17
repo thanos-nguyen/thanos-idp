@@ -18,7 +18,7 @@ backstage:
       - name: CATALOG_LOCATION
         value: "https://raw.githubusercontent.com/thanos-nguyen/thanos-idp/refs/heads/main/templates/catalog-all.yaml"
       - name: POSTGRES_HOST
-        value: "backstage-app-cluster-rw"
+        value: "cnpg-app-cluster-rw.cnpg.svc.cluster.local"
       - name: POSTGRES_PORT
         value: "5432"
       - name: POSTGRES_USER
