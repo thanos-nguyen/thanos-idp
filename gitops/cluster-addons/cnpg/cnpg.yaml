@@ -31,7 +31,7 @@ spec:
             postInitApplicationSQL:
             - ALTER ROLE backstage CREATEDB
             secret:
-              name: cnpg-cluster-secret
+              name: cnpg-ns-cluster-secret
         backups:
           enabled: false
   syncPolicy:
@@ -41,3 +41,10 @@ spec:
     syncOptions:
     - ServerSideApply=true
     - CreateNamespace=true
+  ignoreDifferences:
+  - group: postgresql.cnpg.io
+    kind: Cluster
+    namespace: backstage
+    jqPathExpressions:
+    - ".spec.postgresql.pg_hba"
+    - ".spec.postgresql.pg_ident"

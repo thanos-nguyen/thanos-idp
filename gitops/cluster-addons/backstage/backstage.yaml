@@ -28,10 +28,3 @@ spec:
       allowEmpty: true
     syncOptions:
     - CreateNamespace=true
-  ignoreDifferences:
-  - group: postgresql.cnpg.io
-    kind: Cluster
-    namespace: backstage
-    jqPathExpressions:
-    - ".spec.postgresql.pg_hba"
-    - ".spec.postgresql.pg_ident"
