@@ -6,6 +6,25 @@ metadata:
 spec:
   project: infra
   sources:
+  - repoURL: https://cloudnative-pg.github.io/charts
+    targetRevision: 0.1.0
+    chart: cluster
+    helm:
+      valuesObject:
+        type: postgresql
+        mode: standalone
+        version:
+          postgresql: "16"
+        cluster:
+          instances: 1
+          initdb:
+            owner: backstage
+            postInitApplicationSQL:
+            - ALTER ROLE backstage CREATEDB
+            secret:
+              name: cnpg-cluster-secret
+        backups:
+          enabled: false
   - repoURL: https://github.com/thanos-nguyen/thanos-idp.git
     targetRevision: HEAD
     path: gitops/cluster-addons/backstage/manifest
@@ -28,3 +47,10 @@ spec:
       allowEmpty: true
     syncOptions:
     - CreateNamespace=true
+  ignoreDifferences:
+  - group: postgresql.cnpg.io
+    kind: Cluster
+    namespace: backstage
+    jqPathExpressions:
+    - ".spec.postgresql.pg_hba"
+    - ".spec.postgresql.pg_ident"
